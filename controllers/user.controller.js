@@ -57,8 +57,11 @@ module.exports = {
             }
             
             if (req.file) {
-                user.profilePicture = req.file.path.replace(/\\/g, '/');
+                // buat URL publik sesuai static middleware di app.js
+                user.profilePicture = `api/uploads/profile/${req.file.filename}`;
+
             }
+
 
             await user.save();
             const plain = user.get({ plain: true });
